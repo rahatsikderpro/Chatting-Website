@@ -1,0 +1,6 @@
+localStorage.setItem('Name', 'Rahat')
+
+
+
+
+

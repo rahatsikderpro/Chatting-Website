@@ -1,0 +1,12 @@
+:root{
+    --background-Color: hsl(173, 86%, 15%);
+    --chat-list-bg-color: hsla(173, 87%, 15%, 0.2);
+    --header-background-Color: hsl(173, 86%, 8%);
+    --background-color-white: white;
+    --text-color:white;
+    --text-bg-color-reciver: hsla(173, 87%, 15%, 0.2);
+    --text-bg-color-sender: hsla(173, 87%, 15%, 0.5);
+    --icon-color1:hsl(173, 86%, 8%);
+    --icon-color2:hsl(0, 0%, 100%);
+    --loading-screen-bg: hsl(174, 91%, 9%);
+}

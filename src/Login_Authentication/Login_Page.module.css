@@ -1,0 +1,63 @@
+.mainContainer{
+    font-family: var(--main-font);
+    margin: auto;
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    background-color: var(--background-Color);
+    height:100vh;
+    padding: 20px;
+
+}
+.loginText{
+    display: flex;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 24px;
+    text-align: center;
+}
+.loginSection{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.inputSection{
+    height: 32px;
+    padding: 1em;
+    font-size: 18px;
+    border: none;
+    outline: none;
+}
+.passwordInputSection{
+    height: 32px;
+    padding: 1em;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    width: 92%;
+}
+.passwordDiv{
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color-white);
+    width: 100%;
+}
+.eyeicon{
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.3em;
+}
+.loginBtn{
+    height: 32px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.regBtn{
+    height: 32px;
+    font-size: 18px;
+    cursor: pointer;
+}

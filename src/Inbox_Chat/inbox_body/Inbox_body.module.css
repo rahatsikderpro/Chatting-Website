@@ -1,0 +1,110 @@
+
+.main_Container{
+   margin: auto;
+   max-width: 480px;
+   width: 100%;
+   background-color: var(--chat-list-bg-color);   
+}
+.endOfMessageText{
+    margin: auto;
+    width: auto;
+    padding: 1.5em;
+
+}
+.sub_Container{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    margin-top: 8vh;
+    height: calc(100vh - 8vh - 7vh);
+    padding: 2em .5em;
+    overflow-y: auto;
+    max-width: 480px;
+    width: 100%;
+   
+    
+}
+.sub_Container::-webkit-scrollbar{
+    display: none;
+}
+.messagesStyle{
+    position: static;
+    bottom: 0;
+}
+.messege_left{
+    display: flex;
+    width: 350px;
+    justify-content: start;
+    background-color: var(--text-bg-color-reciver);
+    padding: 0.8em 1em;
+    border-radius: 1em;
+}
+.messege_right{
+    display: flex;
+    width: 350px;
+    margin-left: auto;
+    justify-content: end;
+    background-color: var(--text-bg-color-sender);
+    padding: 0.8em 1em;
+    border-radius: 1em;
+}
+
+
+
+/* div 2 */
+.container{
+    margin: 0 auto;
+    max-width: 480px;
+    width: 100%;
+        
+}
+
+.messegeBox{
+    background-color: var(--chat-list-bg-color);
+    max-width: 480px;
+    width: 100%;    
+    position: fixed;
+    padding: 0 1vh 1vh 1vh;
+    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.sendBox{
+    background-color: var(--header-background-Color);
+    max-width: 350px;
+    width: 100%;
+    height: 6vh;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    color: var(--icon-color2);
+    font-size: 24px;
+}
+.messegeBoxInput{
+    height: 4vh;
+    max-width: 200px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    caret-color: var(--icon-color2);
+    color: var(--text-color);
+    font-size: 18px;
+}
+
+.sentBtn{
+    color: var(--text-color);
+    font-size: 20px;
+    background-color: var(--header-background-Color);
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

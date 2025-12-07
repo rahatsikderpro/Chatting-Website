@@ -1,0 +1,123 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--main-font);
+}
+.loading_div{
+  margin: auto;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background-color: var(--loading-screen-bg);
+  color: var(--text-color);
+  height:100vh;
+  padding: 20px;
+  font-size: 3em;
+  
+}
+.nav_Bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem 2rem;
+  height: 8vh;
+  position: fixed;
+  background-color: var(--header-background-Color);
+}
+.nav_BarIcon{
+  display: flex;
+  gap: 20px;
+}
+.log_Out_btn{
+  height: 3vh;
+  width: 10vh;
+  cursor: pointer;
+}
+.app_Container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  margin-top: 0;
+  background-color: var(--background-Color);
+  color: var(--text-color);
+  
+}
+.min_Section{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8vh;
+  padding: 1.1rem 1.2rem; 
+  padding-bottom: 0;
+  height: calc(100vh - 8vh);
+  overflow-y: auto;
+  
+}
+.min_Section::-webkit-scrollbar {
+  display: none;
+}
+.filter_Div{
+  display: flex;
+  gap: 32px;
+  padding: 10px 20px;
+}
+.chat_list{
+  padding: 8px 16px;
+  display: flex;
+  justify-content:space-between;
+  align-items: start;
+  margin-bottom: 12px;
+  gap: 1em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) ;
+  
+
+}
+.chat_item{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  
+}
+.chat_avatar {
+  border-radius: 50%;
+}
+
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: space-between; 
+  align-items: center;     
+  height: 4.4rem;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 4rem;
+  background-color: var(--header-background-Color);
+}
+.footer_Chats, .footer_Updates, .footer_Group, .footer_Phone{
+  display: flex;
+  gap: 0.5em;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+};

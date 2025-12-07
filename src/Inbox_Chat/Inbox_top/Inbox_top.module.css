@@ -1,0 +1,46 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.inbox_Top{display: flex;
+   background-color: red;
+   max-width: 480px;
+   width: 100%;
+   margin: auto;
+   /* height: 4.5em; */
+}
+.chat_Header{
+   position: fixed;
+   display: flex;
+   justify-content: space-between;
+   max-width: 480px;
+   width: 100%;
+   height: 8vh;
+   background-color: var(--header-background-Color);
+   color: var(--text-color);
+   padding: 0 1rem;
+}
+.chat_Header_Left{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.backwardArrow{
+  cursor: pointer;
+  
+}
+.chat_Header_Right{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
