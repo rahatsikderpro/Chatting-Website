@@ -3,14 +3,14 @@ import Body from './Body.jsx'
 import Footer from './Footer.jsx'
 import Inbox from './Inbox_Chat/Inbox_top/Inbox_top.jsx';
 import Inbox_Main from './Inbox_Chat/inbox_body/Inbox_body.jsx';
-import Inbox_Bottom from './Inbox_Chat/Inbox_bottom/inbox_bottom.jsx';
+// import Inbox_Bottom from './Inbox_Chat/Inbox_bottom/inbox_bottom.jsx';
 import Login_Page from './Login_Authentication/Login_Page.jsx';
 import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut,} from "firebase/auth"; 
 import {UserContext, UserEmailContext, UserIDContext, SelectedUserIDContext} from "./Contex/UserContex.js"
 import {LoadingState} from "./Contex/LoadingContex.js"
-import { db } from "./Database/firebase.js";
+// import { db } from "./Database/firebase.js";
 import { addDoc, collection, serverTimestamp, getDocs, query, where} from "firebase/firestore";
 
 
