@@ -47,7 +47,6 @@ function App() {
         <div>
           <Inbox/>
           <Inbox_Main/>
-          <Inbox_Bottom/>
         </div>
       </SelectedUserIDContext>
     )
