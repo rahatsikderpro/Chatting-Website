@@ -13,6 +13,7 @@ function Login_Page () {
     const {setloadingState} = useContext(LoadingState)
     const {setUserID} = useContext(UserIDContext);
     const [showPassword, setShowPassword] = useState(false);
+    const [showError, setErrorText] = useState(null);
     const togglePassword = () => {
         setShowPassword((prev) => !prev);
     };
@@ -52,7 +53,8 @@ function Login_Page () {
             }
         }
         catch (error) {
-            console.error("Login failed:", error.message);
+            console.error("Login failed:", error.message, error.code);
+            setErrorText(firebaseErrorMessage(error.code));
         };
         
     };
@@ -96,6 +98,7 @@ function Login_Page () {
             setregistrationstate(false)
         } catch (error) {
                 console.error("Registration failed:", error.message);
+                setErrorText(firebaseErrorMessage(error.code));
             }
         handleLogin(e);
     }
@@ -106,10 +109,25 @@ function Login_Page () {
     const showLogin = ()=>{
         setregistrationstate(false)
     }
+    const firebaseErrorMessage = (code) => {
+        switch (code) {
+            case "auth/invalid-credential":
+                return "Incorrect email or password.";
+
+            // need to set code correctly
+            case "auth/email-already-in-use":
+                return "This email is already registered.";
+            case "auth/weak-password":
+                return "Password should be at least 6 characters.";
+            default:
+                return "Something went wrong. Please try again.";
+        }
+    };
     // const consolshow = ()=>{
     //     console.log("Reg. form info ", FullName, email, password)
     // }
     if(registrationstate){
+
          return (
             <div>
                 <div className={styles.mainContainer}>
@@ -141,11 +159,13 @@ function Login_Page () {
                                 <div  onClick={togglePassword} className={styles.eyeicon}> {showPassword ? <FaEyeSlash /> : <FaEye />}</div>
                             </div>
                             <button className={styles.regBtn}>Registration</button>
+                            {showError && <p className="error">{showError}</p>}
                         </div>
                     </form>
                     <button className={styles.loginBtn} onClick={showLogin}>Log In</button>
                 </div>
-
+                
+            
             </div>
         );
     }    
@@ -175,13 +195,15 @@ function Login_Page () {
                             <div  onClick={togglePassword} className={styles.eyeicon}> {showPassword ? <FaEyeSlash /> : <FaEye />}</div>
                         </div>
                         <button className={styles.loginBtn}>Log In</button>
+                        {showError && <p className="error">{showError}</p>}
                         
                     </div>
                 </form>
                 <button className={styles.regBtn} onClick={showReg}>Sign Up</button>
             </div>
-
+        
         </div>
+        
     );
     
 };
