@@ -2,19 +2,21 @@ import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import { db } from "./Database/firebase.js";
 import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "firebase/firestore";
-import {UserContext, UserIDContext, SelectedUserIDContext} from "./Contex/UserContex.js"
-
+import {UserContext, UserIDContext, SelectedUserIDContext, LoggedUserContext} from "./Contex/UserContex.js"
 
 
 function Chat_list(){
 
     const {usernamefromContext} = useContext(UserContext)
     const {SelectedUserIDContext1, setSelectedUserIDContext1} = useContext(SelectedUserIDContext)
+    const {currentUser, setCurrentUser} = useContext(LoggedUserContext);
 
     const {userID1} = useContext(UserIDContext)
     console.log("const {userID}", userID1)
     let loggedUserID = Number(localStorage.getItem('loggedUserID')) || userID1; //Get = from "Login page >> Local Storage"
     const [userslist, setUsers] = useState()
+    const [loggeduser, setLoggedUser] = useState()
+console.log("loggeduser", loggeduser)
     const handleUserClick = (userID) => {
         localStorage.setItem("receiverID", userID);
         setSelectedUserIDContext1(userID);
@@ -31,7 +33,12 @@ function Chat_list(){
             ...doc.data(),
             }));
             const filteredUsers = usersList.filter(user => user.userID !== loggedUserID); 
+            //const filteredLoggedUser = usersList.filter(user => user.userID == loggedUserID);
+            
+            const filteredLoggedUser = usersList.find(user => user.userID === loggedUserID);
             setUsers(filteredUsers);
+            setLoggedUser(filteredLoggedUser);
+            setCurrentUser(filteredLoggedUser.fullName);
         });
         return () => unsub();
     }, [loggedUserID]);
@@ -54,6 +61,7 @@ function Chat_list(){
                             </div>
                             <div className="chat_time">7:43 PM</div>
                         </div>
+                        <div>{loggeduser.fullName} Kello</div>
                     </React.Fragment>
                 ))}
             </div>

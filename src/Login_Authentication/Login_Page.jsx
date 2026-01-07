@@ -5,7 +5,7 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWith
 import { addDoc, collection, serverTimestamp, getDocs, query, where} from "firebase/firestore";
 import { db } from "../Database/firebase.js";
 import {LoadingState} from "../Contex/LoadingContex.js"
-import {UserIDContext} from "../Contex/UserContex.js"
+import {UserIDContext, LoggedUserContext} from "../Contex/UserContex.js"
 import { FaArrowLeft } from "react-icons/fa6";
 
 
@@ -14,6 +14,7 @@ function Login_Page () {
     const {setUserID} = useContext(UserIDContext);
     const [showPassword, setShowPassword] = useState(false);
     const [showError, setErrorText] = useState(null);
+    
     const togglePassword = () => {
         setShowPassword((prev) => !prev);
     };

@@ -2,12 +2,13 @@ import { FaCamera } from "react-icons/fa6";
 import { FaSistrix } from "react-icons/fa6";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import {getAuth, signOut,} from "firebase/auth"; 
-import React, { useContext } from "react";
-import { SelectedUserIDContext } from "./Contex/UserContex";
+import { useContext } from "react";
+import { SelectedUserIDContext, LoggedUserContext} from "./Contex/UserContex.js";
 
 function Header(){
     const {setSelectedUserIDContext1} = useContext(SelectedUserIDContext)
     const Auth = getAuth();
+    const {currentUser, setCurrentUser} = useContext(LoggedUserContext);
     const handleLogout = async () => {
         try {
             
@@ -27,7 +28,7 @@ function Header(){
         <header>
             <nav className="nav_Bar">
                 <div>
-                    <div>Pic: nickname</div>
+                    <div>Pic:{currentUser}</div>
                 </div>
                 <div className="nav_BarIcon">
                     {/* <div><FaCamera/></div>

@@ -8,7 +8,7 @@ import Login_Page from './Login_Authentication/Login_Page.jsx';
 import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut,} from "firebase/auth"; 
-import {UserContext, UserEmailContext, UserIDContext, SelectedUserIDContext} from "./Contex/UserContex.js"
+import {UserContext, UserEmailContext, UserIDContext, SelectedUserIDContext, LoggedUserContext} from "./Contex/UserContex.js"
 import {LoadingState} from "./Contex/LoadingContex.js"
 // import { db } from "./Database/firebase.js";
 import { addDoc, collection, serverTimestamp, getDocs, query, where} from "firebase/firestore";
@@ -21,6 +21,7 @@ function App() {
 
   const [user, setUser] = useState(null)
   const [userEmail, setUserEmail] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
   console.log('userEmail', userEmail)
 
 
@@ -41,13 +42,17 @@ function App() {
   // const [password, setPassword] = useState("");
   //login check 
   if (loadingState ) {return (<div className="loading_div"> Loading...</div>)};
+  
   if(SelectedUserIDContext1){
     return (
       <SelectedUserIDContext value={{SelectedUserIDContext1, setSelectedUserIDContext1}}>
+
+        <LoggedUserContext value={{currentUser, setCurrentUser}}>
         <div>
           <Inbox/>
           <Inbox_Main/>
         </div>
+        </LoggedUserContext>
       </SelectedUserIDContext>
     )
   }
@@ -73,6 +78,7 @@ function App() {
         <UserEmailContext value={{userEmail, setUserEmail}}>
         <UserIDContext value={{userID1, setUserID}}>
         <SelectedUserIDContext value={{SelectedUserIDContext1, setSelectedUserIDContext1}}>
+        <LoggedUserContext value={{currentUser, setCurrentUser}}>
           <LoadingState value= {{setSelectedUser}}>
                 
                 <Routes>
@@ -85,8 +91,8 @@ function App() {
                                                   </div>) : 
                                                 (<Login_Page/>)} />
                 </Routes>
-
           </LoadingState>
+          </LoggedUserContext>
         </SelectedUserIDContext>
         </UserIDContext>
         </UserEmailContext>
