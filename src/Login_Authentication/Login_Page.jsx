@@ -24,6 +24,46 @@ function Login_Page () {
     const [email, setEmail] = useState("");
     const [FullName, setFullName] = useState("");
     const [password, setPassword] = useState("");
+    
+    
+    //registration with Profile Photo
+    const cloudName = 'drwrqg1zj';
+    const unsignedUploadPreset = 'images';
+    // *********** Upload file to Cloudinary ******************** //
+    function uploadFile(file) {
+        const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+        const fd = new FormData();
+        fd.append('upload_preset', unsignedUploadPreset);
+        fd.append('tags', 'browser_upload'); // Optional - add tags for image admin in Cloudinary
+        fd.append('file', file);
+
+        return fetch(url, { 
+                    method: 'POST', 
+                    body: fd 
+        })
+        .then(res => res.json())
+        .then(data => data.secure_url)  // now this value is returned to caller
+        .catch(err => {
+            console.error('Error uploading the file:', err);
+            throw err;  // re-throw so await can catch
+        });
+    
+        // fetch(url, {
+        //     method: 'POST',
+        //     body: fd,
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //     // File uploaded successfully
+        //     return data.secure_url;
+        //     })
+        //     .catch((error) => {
+        //     console.error('Error uploading the file:', error);
+        //     });
+    }
+
+
+
     //login logic
     const handleLogin = async (e)=> {
         e.preventDefault();
@@ -89,10 +129,16 @@ function Login_Page () {
             }
             
             //send to firebase database
+            const file = fileRef.current.files[0];  // get the selected file
+            let receivedurl = "";                    // prepare variable to store the URL
+            if (file) {
+                receivedurl = await uploadFile(file); // call uploadFile and wait for URL
+            }
             const newUser = await addDoc(collection(db, "users"), {
                 email: userinfo.user.email,   
                 fullName: FullName,      // from top state
-                userID: newChatID
+                userID: newChatID,
+                picurl: receivedurl,
             });
             console.log("✅ User registered with Firestore ID:", newUser.id, "and ChatID:", newChatID);
             
