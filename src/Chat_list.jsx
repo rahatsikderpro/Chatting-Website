@@ -53,7 +53,7 @@ console.log("loggeduser", loggeduser)
                             style={{ cursor: "pointer" }}
                         >
                             <div className="chat_item">
-                                <img className="chat_avatar" src="/Chat_Pic_1.png" />
+                                <img className="chat_avatar" src="/Chat_Pic_1.jpg" />
                                 <div className="chat_info">
                                     <div className="chat_name">{user.fullName}</div>
                                     <div className="chat_last-message">Hey, what's up?</div>
@@ -61,7 +61,7 @@ console.log("loggeduser", loggeduser)
                             </div>
                             <div className="chat_time">7:43 PM</div>
                         </div>
-                        <div>{loggeduser.fullName} Kello</div>
+                        <input type="file" />
                     </React.Fragment>
                 ))}
             </div>
