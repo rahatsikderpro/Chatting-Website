@@ -43,6 +43,7 @@ console.log("loggeduser", loggeduser)
         return () => unsub();
     }, [loggedUserID]);
 
+
     return (
         <>
             <div>
@@ -61,7 +62,7 @@ console.log("loggeduser", loggeduser)
                             </div>
                             <div className="chat_time">7:43 PM</div>
                         </div>
-                        <div>{loggeduser.fullName} Kello</div>
+                        
                     </React.Fragment>
                 ))}
             </div>
