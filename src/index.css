@@ -38,6 +38,19 @@ html, body {
   position: fixed;
   background-color: var(--header-background-Color);
 }
+.nav_Bar_info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.header_avatar{
+  width: 50px;
+  height: 50px; 
+  border-radius: 50%;
+  object-fit: cover;
+}
 .nav_BarIcon{
   display: flex;
   gap: 20px;
@@ -97,7 +110,10 @@ html, body {
   
 }
 .chat_avatar {
+  width: 50px;
+  height: 50px; 
   border-radius: 50%;
+  object-fit: cover;   
 }
 
 

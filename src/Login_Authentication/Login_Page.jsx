@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import styles from './Login_Page.module.css'
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut} from "firebase/auth"; 
@@ -27,9 +27,10 @@ function Login_Page () {
     
     
     //registration with Profile Photo
-    const cloudName = 'drwrqg1zj';
-    const unsignedUploadPreset = 'images';
+    const cloudName = 'dctbbdfng';
+    const unsignedUploadPreset = 'Profiles';
     // *********** Upload file to Cloudinary ******************** //
+    const fileRef = useRef(null);
     function uploadFile(file) {
         const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
         const fd = new FormData();
@@ -109,6 +110,17 @@ function Login_Page () {
     const handleregister = async (e) => {
         e.preventDefault();
         try {
+            //send to firebase database
+            const file = fileRef.current.files[0];  // get the selected file
+            //const file = fileRef.current?.files?.[0] || null;
+            let receivedurl = "";
+            console.log("Selected file:", file);
+            console.log("receivedurl", receivedurl);                    // prepare variable to store the URL
+            if (file) {
+                receivedurl = await uploadFile(file); // call uploadFile and wait for URL
+                
+            }
+            
             const userinfo = await createUserWithEmailAndPassword(auth, email, password);
             console.log("User registered in Auth:", userinfo.user.email);
             
@@ -128,27 +140,25 @@ function Login_Page () {
                     newChatID = maxChatID + 1; // increment
             }
             
-            //send to firebase database
-            const file = fileRef.current.files[0];  // get the selected file
-            let receivedurl = "";                    // prepare variable to store the URL
-            if (file) {
-                receivedurl = await uploadFile(file); // call uploadFile and wait for URL
-            }
+            
             const newUser = await addDoc(collection(db, "users"), {
-                email: userinfo.user.email,   
-                fullName: FullName,      // from top state
-                userID: newChatID,
-                picurl: receivedurl,
+                    email: userinfo.user.email,   
+                    fullName: FullName,      // from top state
+                    userID: newChatID,
+                    profile_image_url: receivedurl
             });
             console.log("✅ User registered with Firestore ID:", newUser.id, "and ChatID:", newChatID);
-            
             setregistrationstate(false)
+            handleLogin(e);
+            
+            
         } catch (error) {
                 console.error("Registration failed:", error.message);
                 setErrorText(firebaseErrorMessage(error.code));
             }
-        handleLogin(e);
     }
+
+    
     const showReg =  ()=>{
         setregistrationstate(true)
 
@@ -178,7 +188,7 @@ function Login_Page () {
          return (
             <div>
                 <div className={styles.mainContainer}>
-                    <div className={styles.loginText}>Register</div>
+                    <div className={styles.loginText}>Registration Form</div>
                     <form onSubmit={handleregister} >
                         <div className={styles.loginSection}>
                             <input 
@@ -205,10 +215,16 @@ function Login_Page () {
                                 />
                                 <div  onClick={togglePassword} className={styles.eyeicon}> {showPassword ? <FaEyeSlash /> : <FaEye />}</div>
                             </div>
-                            <button className={styles.regBtn}>Registration</button>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                ref={fileRef}
+                            />
+                            <button className={styles.regBtn}>Sign Up</button>
                             {showError && <p className="error">{showError}</p>}
                         </div>
                     </form>
+                    <div className={styles.orClass}>or</div>
                     <button className={styles.loginBtn} onClick={showLogin}>Log In</button>
                 </div>
                 
@@ -246,6 +262,7 @@ function Login_Page () {
                         
                     </div>
                 </form>
+                <div className={styles.orClass}>or</div>
                 <button className={styles.regBtn} onClick={showReg}>Sign Up</button>
             </div>
         

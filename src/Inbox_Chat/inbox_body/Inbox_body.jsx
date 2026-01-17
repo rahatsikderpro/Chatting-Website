@@ -7,23 +7,26 @@ import { FaCamera } from "react-icons/fa6";
 // import "../../Database/Main_Message_Logic.jsx";
 // // import "../../Database/firebase.js"; 
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { db } from "../../Database/firebase.js";
 import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "firebase/firestore";
 // import { FaFaceGrin, FaPaperclip, FaCamera, FaPaperPlane } from "react-icons/fa6";
 import styles from './Inbox_body.module.css'
 // import styles from "./Chat.module.css"; // your CSS module
 import { useParams } from "react-router-dom";
+import { LoggedUserContext } from "../../Contex/UserContex.js"
+
 
 function Inbox_Main() {
-
     
     const [text, setText] = useState("");
     const messagesEndRef = useRef(null);
     const senderID = Number(localStorage.getItem('loggedUserID')); //Get = from "Login page >> Local Storage"
     const  receiverID  = Number(localStorage.getItem('receiverID'))
     let loggeduserID = senderID;
-    
+    const {currentUser, setCurrentUser} = useContext(LoggedUserContext);
+
+
     function create_newchatID(user1, user2){
         const sorted = [user1, user2].sort((a, b) => a - b);
         return "Chat" + sorted.join("");
@@ -80,12 +83,16 @@ function Inbox_Main() {
                 ? styles.messege_right
                 : styles.messege_left;
             return (
-              <div key={msg.id} className={`${msgClass} messagesStyle`}>
-                <div>{msg.message}</div>
-              </div>
+              <>
+                <div key={msg.id} className={`${msgClass} messagesStyle`}>
+                  <div>{msg.message}</div>
+                  
+                </div>
+                
+              </>
             );
           })}
-
+          <div>nemw: {currentUser.fullName}</div>
           <div ref={messagesEndRef} />
         </div>
       </div>

@@ -9,6 +9,7 @@ function Header(){
     const {setSelectedUserIDContext1} = useContext(SelectedUserIDContext)
     const Auth = getAuth();
     const {currentUser, setCurrentUser} = useContext(LoggedUserContext);
+    console.log ("currentUser Headerr", currentUser); 
     const handleLogout = async () => {
         try {
             
@@ -27,9 +28,11 @@ function Header(){
     return(
         <header>
             <nav className="nav_Bar">
-                <div>
-                    <div>Pic:{currentUser}</div>
+                <div className="nav_Bar_info">
+                    <img className="header_avatar" src={currentUser?.profile_image_url || "/Chat_Pic_1.jpg"} />                
+                    <div>{currentUser?.fullName || "Name"}</div>
                 </div>
+
                 <div className="nav_BarIcon">
                     {/* <div><FaCamera/></div>
                     <div><FaSistrix/></div>

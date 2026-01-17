@@ -38,7 +38,7 @@ console.log("loggeduser", loggeduser)
             const filteredLoggedUser = usersList.find(user => user.userID === loggedUserID);
             setUsers(filteredUsers);
             setLoggedUser(filteredLoggedUser);
-            setCurrentUser(filteredLoggedUser.fullName);
+            setCurrentUser(filteredLoggedUser);
         });
         return () => unsub();
     }, [loggedUserID]);
@@ -54,7 +54,7 @@ console.log("loggeduser", loggeduser)
                             style={{ cursor: "pointer" }}
                         >
                             <div className="chat_item">
-                                <img className="chat_avatar" src="/Chat_Pic_1.jpg" />
+                                <img className="chat_avatar" src={user.profile_image_url || "/Chat_Pic_1.jpg"} />
                                 <div className="chat_info">
                                     <div className="chat_name">{user.fullName}</div>
                                     <div className="chat_last-message">Hey, what's up?</div>
